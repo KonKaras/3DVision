@@ -1,0 +1,23 @@
+# Config adapted from https://github.com/cleinc/bts/blob/master/pytorch/arguments_train_nyu.txt
+# Dataset
+dataset: nyu
+input_height: 416
+input_width: 544
+max_depth: 10
+#do_random_rotate: true
+degree: 2.5
+num_workers: 0
+
+
+standardize_image_input: false # Do not divide image by 255 because of detectron
+# Train
+data_path: data/NYUv2-raw/raw/sync
+gt_path: data/NYUv2-raw/raw/sync
+filenames_file: data/NYUv2-raw/train_test_inputs/nyudepthv2_train_files_with_gt.txt
+# Val = Test
+data_path_eval: data/NYUv2-raw/official_splits/test/
+gt_path_eval: data/NYUv2-raw/official_splits/test/
+filenames_file_eval: data/NYUv2-raw/train_test_inputs/nyudepthv2_test_files_with_gt.txt
+min_depth_eval: 1e-3
+max_depth_eval: 10
+eigen_crop: true
