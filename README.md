@@ -100,3 +100,6 @@ data/NYUv2-raw
 ##Training
 * Use the [custom_train.py](custom_train.py) script to use the Panoptic AdaBins Model
 * Use the [train.py](AdabinsModified/train.py) script to use the AdaBins Model
+
+##Disclaimer
+* I was not involved in any rewriting of Detectron2's PanopticFPN module (/detectron & dataset/utils.py)
