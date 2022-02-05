@@ -13,7 +13,7 @@ def extract_adabins_feature_encoder_decoder():
     pretrained_path = "pretrained/AdaBins_nyu.pt"
     model, _, _ = model_io.load_checkpoint(pretrained_path, model)
 
-    encoder = model.encoder.original_model
+    encoder = model.encoder
     encoder.requires_grad = False
 
     decoder = model.decoder

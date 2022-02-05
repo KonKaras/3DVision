@@ -85,6 +85,7 @@ def main_worker(gpu, ngpus_per_node, args):
         model = model.cuda(args.gpu)
 
     args.multigpu = False
+    # throws error on windows systems, removed multiple gpu support for now
     """
     if args.distributed:
         # Use DDP
@@ -213,7 +214,9 @@ def train(model, args, epochs=10, experiment_name="DeepLab", lr=0.0001, root="."
             optimizer.step()
             if should_log and step % 5 == 0:
                 wandb.log({f"Train/{criterion_ueff.name}": l_dense.item()}, step=step)
-                wandb.log({f"Train/{criterion_bins.name}": l_chamfer.item()}, step=step)
+                if args.w_chamfer > 0:
+                    wandb.log({f"Train/{criterion_bins.name}": l_chamfer.item()}, step=step)
+                    wandb.log({f"Train/Loss": loss}, step=step)
 
             step += 1
             scheduler.step()
@@ -311,24 +314,24 @@ def convert_arg_line_to_args(arg_line):
 
 if __name__ == '__main__':
 
-    # Arguments
+    # Arguments based on AdaBins defaults
     parser = argparse.ArgumentParser(description='Training script. Default values of all arguments are recommended for reproducibility', fromfile_prefix_chars='@',
                                      conflict_handler='resolve')
     parser.convert_arg_line_to_args = convert_arg_line_to_args
     parser.add_argument('--epochs', default=25, type=int, help='number of total epochs to run')
-    parser.add_argument('--n-bins', '--n_bins', default=80, type=int,
+    parser.add_argument('--n-bins', '--n_bins', default=256, type=int,
                         help='number of bins/buckets to divide depth range into')
     parser.add_argument('--lr', '--learning-rate', default=0.000357, type=float, help='max learning rate')
     parser.add_argument('--wd', '--weight-decay', default=0.1, type=float, help='weight decay')
-    parser.add_argument('--w_chamfer', '--w-chamfer', default=0.1, type=float, help="weight value for chamfer loss")
+    parser.add_argument('--w_chamfer', '--w-chamfer', default=0, type=float, help="weight value for chamfer loss")
     parser.add_argument('--div-factor', '--div_factor', default=25, type=float, help="Initial div factor for lr")
     parser.add_argument('--final-div-factor', '--final_div_factor', default=100, type=float,
                         help="final div factor for lr")
 
-    parser.add_argument('--bs', default=1, type=int, help='batch size')
-    parser.add_argument('--validate-every', '--validate_every', default=100, type=int, help='validation period')
+    parser.add_argument('--bs', default=4, type=int, help='batch size')
+    parser.add_argument('--validate-every', '--validate_every', default=500, type=int, help='validation period')
     parser.add_argument('--gpu', default=None, type=int, help='Which gpu to use')
-    parser.add_argument("--name", default="PanopticAdabins")
+    parser.add_argument("--name", default="PanopticAdabinsBathroomNoChamfer")
     parser.add_argument("--norm", default="linear", type=str, help="Type of norm/competition for bin-widths",
                         choices=['linear', 'softmax', 'sigmoid'])
     parser.add_argument("--same-lr", '--same_lr', default=False, action="store_true",

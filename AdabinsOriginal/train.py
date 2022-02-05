@@ -70,7 +70,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
     ###################################### Load model ##############################################
 
-    model = models.UnetAdaptiveBins.build(n_bins=args.n_bins, min_val=args.min_depth, max_val=args.max_depth,
+    model = models.UnetAdaptiveBinsPretrained.build(n_bins=args.n_bins, min_val=args.min_depth, max_val=args.max_depth,
                                           norm=args.norm)
 
     ################################################################################################
@@ -80,6 +80,7 @@ def main_worker(gpu, ngpus_per_node, args):
         model = model.cuda(args.gpu)
 
     args.multigpu = False
+    """
     if args.distributed:
         # Use DDP
         args.multigpu = True
@@ -101,7 +102,7 @@ def main_worker(gpu, ngpus_per_node, args):
         args.multigpu = True
         model = model.cuda()
         model = torch.nn.DataParallel(model)
-
+    """
     args.epoch = 0
     args.last_epoch = -1
     train(model, args, epochs=args.epochs, lr=args.lr, device=args.gpu, root=args.root,
@@ -137,7 +138,12 @@ def train(model, args, epochs=10, experiment_name="DeepLab", lr=0.0001, root="."
     criterion_bins = BinsChamferLoss() if args.chamfer else None
     ################################################################################################
 
-    model.train()
+    # model.train()
+    model.encoder.eval()
+    model.decoder.eval()
+    #model.panoptic_predictor.eval()
+    model.adaptive_bins_layer.train()
+    model.conv_out.train()
 
     ###################################### Optimizer ################################################
     if args.same_lr:
@@ -200,7 +206,9 @@ def train(model, args, epochs=10, experiment_name="DeepLab", lr=0.0001, root="."
             optimizer.step()
             if should_log and step % 5 == 0:
                 wandb.log({f"Train/{criterion_ueff.name}": l_dense.item()}, step=step)
-                wandb.log({f"Train/{criterion_bins.name}": l_chamfer.item()}, step=step)
+                if args.w_chamfer > 0:
+                    wandb.log({f"Train/{criterion_bins.name}": l_chamfer.item()}, step=step)
+                    wandb.log({f"Train/Loss": loss}, step=step)
 
             step += 1
             scheduler.step()
@@ -228,7 +236,12 @@ def train(model, args, epochs=10, experiment_name="DeepLab", lr=0.0001, root="."
                     model_io.save_checkpoint(model, optimizer, epoch, f"{experiment_name}_{run_id}_best.pt",
                                              root=os.path.join(root, "checkpoints"))
                     best_loss = metrics['abs_rel']
-                model.train()
+                # model.train()
+                model.encoder.eval()
+                model.decoder.eval()
+                #model.panoptic_predictor.eval()
+                model.adaptive_bins_layer.train()
+                model.conv_out.train()
                 #################################################################################################
 
     return model
@@ -298,20 +311,20 @@ if __name__ == '__main__':
         fromfile_prefix_chars='@',
         conflict_handler='resolve')
     parser.convert_arg_line_to_args = convert_arg_line_to_args
-    parser.add_argument('--epochs', default=50, type=int, help='number of total epochs to run')
-    parser.add_argument('--n-bins', '--n_bins', default=80, type=int,
+    parser.add_argument('--epochs', default=25, type=int, help='number of total epochs to run')
+    parser.add_argument('--n-bins', '--n_bins', default=256, type=int,
                         help='number of bins/buckets to divide depth range into')
-    parser.add_argument('--lr', '--learning-rate', default=0.000357, type=float, help='max learning rate')
+    parser.add_argument('--lr', '--learning-rate', default=0.01, type=float, help='max learning rate')
     parser.add_argument('--wd', '--weight-decay', default=0.1, type=float, help='weight decay')
-    parser.add_argument('--w_chamfer', '--w-chamfer', default=0.1, type=float, help="weight value for chamfer loss")
+    parser.add_argument('--w_chamfer', '--w-chamfer', default=0, type=float, help="weight value for chamfer loss")
     parser.add_argument('--div-factor', '--div_factor', default=25, type=float, help="Initial div factor for lr")
     parser.add_argument('--final-div-factor', '--final_div_factor', default=100, type=float,
                         help="final div factor for lr")
 
-    parser.add_argument('--bs', default=1, type=int, help='batch size')
-    parser.add_argument('--validate-every', '--validate_every', default=100, type=int, help='validation period')
+    parser.add_argument('--bs', default=4, type=int, help='batch size')
+    parser.add_argument('--validate-every', '--validate_every', default=500, type=int, help='validation period')
     parser.add_argument('--gpu', default=None, type=int, help='Which gpu to use')
-    parser.add_argument("--name", default="PanopticAdabins")
+    parser.add_argument("--name", default="AdabinsNoChamferBathroom01LR")
     parser.add_argument("--norm", default="linear", type=str, help="Type of norm/competition for bin-widths",
                         choices=['linear', 'softmax', 'sigmoid'])
     parser.add_argument("--same-lr", '--same_lr', default=False, action="store_true",

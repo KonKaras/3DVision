@@ -9,8 +9,10 @@ __pycache__/
 *.so
 
 # Folder
-./wandb
-./checkpoints
+/wandb
+/checkpoints
+/AdabinsModified/wandb
+/other
 
 # Distribution / packaging
 .Python

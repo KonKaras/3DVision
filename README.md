@@ -7,7 +7,8 @@
 
 * [Install Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) compatible with the PyTorch
   version:
-  `python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html`
+  `python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html` or following this [guide](https://medium.com/@yogeshkumarpilli/how-to-install-detectron2-on-windows-10-or-11-2021-aug-with-the-latest-build-v0-5-c7333909676f)
+* Install Weights & Biases:`pip install wandb`
 
 ## Data
 
@@ -37,6 +38,9 @@ data/NYUv2-raw
 │   │ 
 │   └── sync.zip
 ├── splits.mat
+├── train_test_inputs
+│   ├── nyudepthv2_test_files_with_gt.txt
+│   └── nyudepthv2_train_files_with_gt.tx
 └── train_test_inputs
     ├── nyudepthv2_test_files_with_gt.txt
     └── nyudepthv2_train_files_with_gt.tx
@@ -61,6 +65,7 @@ data/NYUv2-raw
     ```
 * Data points to be used for training/testing are listed under [`nyudepthv2_test_files_with_gt.txt`](data/NYUv2-raw/train_test_inputs/nyudepthv2_test_files_with_gt.txt) and
   [`nyudepthv2_train_files_with_gt.txt`](data/NYUv2-raw/train_test_inputs/nyudepthv2_train_files_with_gt.txt).
+* Execute [create_toy_dataset.py](create_toy_nyu_dataset.py) to specify a toy dataset if you do not wish to use the entire dataset.
 ### COCO
 
 * Download files
@@ -92,3 +97,6 @@ data/NYUv2-raw
   Then, run `python datasets/prepare_panoptic_fpn.py`, to extract semantic annotations from panoptic annotations.
   > See [`dataset/coco/prepare_panoptic_fpn.py`](`dataset/coco/prepare_panoptic_fpn.py`).
 * [Official COCO Website](https://cocodataset.org/#download)
+##Training
+* Use the [custom_train.py](custom_train.py) script to use the Panoptic AdaBins Model
+* Use the [train.py](AdabinsOriginal/train.py) script to use the AdaBins Model

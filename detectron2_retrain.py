@@ -1,3 +1,5 @@
+#this is an old script from back when we tried retraining detectron2
+
 import cv2
 import json
 import os
@@ -18,7 +20,7 @@ def _get_cfg():
     # https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5?pli=1#scrollTo=HUjkwRsOn1O0
     # model_cfg_path = config file name relative to detectron2's "configs/"
     # model_cfg_path = "COCO-PanopticSegmentation/panoptic_fpn_R_50_1x.yaml"
-    """
+
     register_coco_panoptic_separated(name="cocosuper_train",
                                      metadata=_get_builtin_metadata("coco_panoptic_separated"),
                                      image_root="./data/coco/images/train2017",
@@ -42,7 +44,7 @@ def _get_cfg():
     cfg.merge_from_file(cfg_file)
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(model_cfg_path)
-    """"
+    """
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file("COCO-PanopticSegmentation/panoptic_fpn_R_50_3x.yaml"))
     cfg.DATASETS.TRAIN = ("cocosuper_train_separated",)
@@ -57,7 +59,7 @@ def _get_cfg():
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 1024  # faster, and good enough for this toy dataset (default: 512)
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 27  # only has one class (ballon). (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
     # NOTE: this config means the number of classes, but a few popular unofficial tutorials incorrect uses num_classes+1 here.
-    """
+
     return cfg
 
 def main():
