@@ -67,7 +67,7 @@ data/NYUv2-raw
 * Data points to be used for training/testing are listed under [`nyudepthv2_test_files_with_gt.txt`](data/NYUv2-raw/train_test_inputs/nyudepthv2_test_files_with_gt.txt) and
   [`nyudepthv2_train_files_with_gt.txt`](data/NYUv2-raw/train_test_inputs/nyudepthv2_train_files_with_gt.txt).
 * Execute [create_toy_dataset.py](create_toy_nyu_dataset.py) to specify a toy dataset if you do not wish to use the entire dataset.
-### COCO
+### COCO (not used for final prototype)
 
 * Download files
   using [coco_download.sh](coco_preparation/coco_download.sh) ([Source](https://gist.github.com/mkocabas/a6177fc00315403d31572e17700d7fd9))
