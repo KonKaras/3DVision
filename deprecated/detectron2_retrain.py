@@ -51,7 +51,7 @@ def _get_cfg():
     cfg.DATASETS.TEST = ()
     cfg.DATALOADER.NUM_WORKERS = 4
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-PanopticSegmentation/panoptic_fpn_R_50_3x.yaml")  # Let training initialize from model zoo
-    cfg.OUTPUT_DIR = "./output"
+    cfg.OUTPUT_DIR = "../output"
     cfg.SOLVER.IMS_PER_BATCH = 1
     cfg.SOLVER.BASE_LR = 0.01  # pick a good LR
     cfg.SOLVER.MAX_ITER = 30000  # 300 iterations seems good enough for this toy dataset; you will need to train longer for a practical dataset

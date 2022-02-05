@@ -2,27 +2,23 @@ import argparse
 
 import configargparse
 import cv2
-import torch
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
 from detectron2.data import MetadataCatalog
-from detectron2.engine import DefaultPredictor
 from detectron2.model_zoo import model_zoo
 from detectron2.modeling import build_model
 from detectron2.utils.visualizer import Visualizer
 from matplotlib import pyplot as plt
 
-from dataset.nyuv2_raw.bts_dataloader import DataLoadPreprocess, ToTensorHelper
+from dataset.nyuv2_raw.bts_dataloader import DataLoadPreprocess
 from dataset.nyuv2_raw.nyuv2_raw_datamodule import NYUv2RawDataModule
-from dataset.utils import ImgToFloatTensor
 from detectron.panoptic_fpn import RefactoredPanopticFPN
 
 import detectron2.data.transforms as T
 
 from detectron.sem_seg_fpn_head import RefactoredSemSegFPNHead
-import torchvision.transforms as TT
 
-from deprecated_train import add_train_args
+from deprecated.deprecated_train import add_train_args
 
 
 def dataload():

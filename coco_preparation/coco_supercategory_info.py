@@ -33,7 +33,7 @@ def main():
                     sc_info["coco_label"] = entry["name"]
                     dict[label] = sc_info
 
-            with open(os.path.join("other", "coco_{}_supercategories_map_by_id.json".format(s)), 'w') as d:
+            with open(os.path.join("../other", "coco_{}_supercategories_map_by_id.json".format(s)), 'w') as d:
                 json.dump(dict, d)
 
 if __name__ == "__main__":

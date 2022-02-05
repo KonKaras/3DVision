@@ -70,7 +70,7 @@ data/NYUv2-raw
 ### COCO
 
 * Download files
-  using [coco_download.sh](coco_download.sh) ([Source](https://gist.github.com/mkocabas/a6177fc00315403d31572e17700d7fd9))
+  using [coco_download.sh](coco_preparation/coco_download.sh) ([Source](https://gist.github.com/mkocabas/a6177fc00315403d31572e17700d7fd9))
   .
 
 * Set environment variable `DETECTRON2_DATASETS={workspaceDir}/data` so that Detectron can find the

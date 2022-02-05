@@ -1,28 +1,15 @@
 import cv2
-import json
 import os
-import random
 
-import torchvision.transforms.functional as TTF
-from torchvision.transforms import InterpolationMode
-
-import numpy
-import numpy as np
 import torch
 from detectron2.config import get_cfg
-from detectron2.engine import DefaultPredictor
 from detectron2.engine import DefaultTrainer
 from detectron2.model_zoo import model_zoo
 from detectron2.utils.visualizer import Visualizer
-from detectron2.data import MetadataCatalog, DatasetCatalog
-from detectron2.data.datasets import register_coco_panoptic, register_coco_panoptic_separated, register_coco_instances
-from detectron2.data.datasets.builtin_meta import _get_builtin_metadata
-from detectron2.utils.visualizer import ColorMode
-from detectron2.evaluation import COCOEvaluator, inference_on_dataset
-from detectron2.data import build_detection_test_loader
+from detectron2.data import MetadataCatalog
 from detectron2.modeling import build_model
 from detectron2.checkpoint import DetectionCheckpointer
-from BatchPredictor import BatchPredictor
+from deprecated.BatchPredictor import BatchPredictor
 def _get_cfg():
     # https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5?pli=1#scrollTo=HUjkwRsOn1O0
     # model_cfg_path = config file name relative to detectron2's "configs/"
