@@ -9,6 +9,7 @@
   version:
   `python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html` or following this [guide](https://medium.com/@yogeshkumarpilli/how-to-install-detectron2-on-windows-10-or-11-2021-aug-with-the-latest-build-v0-5-c7333909676f)
 * Install Weights & Biases:`pip install wandb`
+* [Download](https://drive.google.com/drive/folders/1nYyaQXOBjNdUJDsmJpcRpu6oE55aQoLA) AdaBins pretrained on NYUv2 and move it to /pretrained
 
 ## Data
 

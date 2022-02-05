@@ -22,7 +22,7 @@ import detectron2.data.transforms as T
 from detectron.sem_seg_fpn_head import RefactoredSemSegFPNHead
 import torchvision.transforms as TT
 
-from train import add_train_args
+from deprecated_train import add_train_args
 
 
 def dataload():

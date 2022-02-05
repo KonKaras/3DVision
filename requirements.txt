@@ -9,8 +9,6 @@ pytorch-lightning
 git+https://github.com/qubvel/segmentation_models.pytorch
 torch==1.10.0+cu111
 torchvision~=0.8.2
-torchsummaryX~=1.3.0
-# albumentations
 git+https://github.com/albumentations-team/albumentations
 # Detectron2 https://detectron2.readthedocs.io/en/latest/tutorials/install.html
 -i https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html
