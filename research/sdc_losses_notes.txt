@@ -1,0 +1,23 @@
+panoptic segm. and depth prediction -> multi-task loss
+
+instance segm loss:
+	Mask R-CNN
+	multi-task loss on each sampled RoI L = L_cls + L_box + L_mask
+	https://arxiv.org/pdf/1504.08083.pdf
+		L_cls: 	-log(p_u) for true class u
+		L_box: 	defined over tuple of true bounding box regression targets for class u,v = (v_x,v_y,u_w,u_h) 
+			and predicted tuple tuple tu = (tu_x,tu_y,tu_w,tu_h) for class u
+		for bounding box regression use
+			L_box = Sum smoothL1(tu_i-v_i) with smoothL1(x)   = 	0.5x^2 	,if |x| < 1
+										|x|-0.5	,else
+semantic segm loss:
+	https://arxiv.org/pdf/1411.4038.pdf
+	use full image instead of batches as it converges with same #iterations but significantly faster timewise
+	https://arxiv.org/pdf/1612.03144v2.pdf
+	mask loss weight *10 than score loss (learning rate of 0.03, divided by 10 after 60k mini-batches)
+depth prediction loss:
+	NYU/Cityscapes: standard L1 loss
+	DIW: ranking loss
+
+jointly train all modules by minimizing overall loss function L = a_I*L_I + a_S*L_S + a_D*L_D
+	--> weights unknown!

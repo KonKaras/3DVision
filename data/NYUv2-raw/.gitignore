@@ -1,0 +1,8 @@
+*
+*/
+!.gitignore
+!/splits.mat
+!/train_test_inputs/
+!/official_splits/
+!/raw/
+!/train_test_inputs/*
