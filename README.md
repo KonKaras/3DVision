@@ -99,4 +99,4 @@ data/NYUv2-raw
 * [Official COCO Website](https://cocodataset.org/#download)
 ##Training
 * Use the [custom_train.py](custom_train.py) script to use the Panoptic AdaBins Model
-* Use the [train.py](AdabinsOriginal/train.py) script to use the AdaBins Model
+* Use the [train.py](AdabinsModified/train.py) script to use the AdaBins Model
