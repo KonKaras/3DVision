@@ -1,7 +1,7 @@
 # Panoptic-Depth-Estimation
 
 ## Setup
-
+* See [GDrive](https://drive.google.com/drive/folders/1Ksa5FDakGbba84Ou0WeZgEwhPgCF1xO4?usp=sharing) for slides, checkpoints & logs
 * [Install PyTorch](https://pytorch.org/get-started/locally/) compatible with your CUDA drivers, e.g for CUDA 11.1:
   `pip3 install torch==1.10.0+cu111 torchvision==0.11.1+cu111 -f https://download.pytorch.org/whl/cu111/torch_stable.html`
 
@@ -99,4 +99,7 @@ data/NYUv2-raw
 * [Official COCO Website](https://cocodataset.org/#download)
 ##Training
 * Use the [custom_train.py](custom_train.py) script to use the Panoptic AdaBins Model
-* Use the [train.py](AdabinsOriginal/train.py) script to use the AdaBins Model
+* Use the [train.py](AdabinsModified/train.py) script to use the AdaBins Model
+
+##Disclaimer
+* I was not involved in any rewriting of Detectron2's PanopticFPN module (/detectron & dataset/utils.py)
