@@ -13,6 +13,7 @@ from AdabinsOriginal.models.miniViT import mViT
 from AdabinsOriginal.models.unet_adaptive_bins import Encoder
 from AdabinsOriginal.models.unet_adaptive_bins import DecoderBN
 
+#based on Adabins UNetAdaptiveBins
 
 def main():
     """

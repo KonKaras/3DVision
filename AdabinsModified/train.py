@@ -322,7 +322,7 @@ if __name__ == '__main__':
                         help="final div factor for lr")
 
     parser.add_argument('--bs', default=4, type=int, help='batch size')
-    parser.add_argument('--validate-every', '--validate_every', default=100, type=int, help='validation period')
+    parser.add_argument('--validate-every', '--validate_every', default=500, type=int, help='validation period')
     parser.add_argument('--gpu', default=None, type=int, help='Which gpu to use')
     parser.add_argument("--name", default="AdabinsBathNoChamferLR0001")
     parser.add_argument("--norm", default="linear", type=str, help="Type of norm/competition for bin-widths",
@@ -340,9 +340,9 @@ if __name__ == '__main__':
     parser.add_argument("--workers", default=11, type=int, help="Number of workers for data loading")
     parser.add_argument("--dataset", default='nyu', type=str, help="Dataset to train on")
 
-    parser.add_argument("--data_path", default='./data/NYUv2-raw/raw/sync/sync/', type=str,
+    parser.add_argument("--data_path", default='./data/NYUv2-raw/raw/sync/', type=str,
                         help="path to dataset")
-    parser.add_argument("--gt_path", default='./data/NYUv2-raw/raw/sync/sync/', type=str,
+    parser.add_argument("--gt_path", default='./data/NYUv2-raw/raw/sync/', type=str,
                         help="path to dataset")
 
     parser.add_argument('--filenames_file',

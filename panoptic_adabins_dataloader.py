@@ -10,7 +10,7 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 
-
+#based on adabins dataloader
 def _is_pil_image(img):
     return isinstance(img, Image.Image)
 

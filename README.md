@@ -104,3 +104,4 @@ data/NYUv2-raw
 
 ##Disclaimer
 * I was not involved in any rewriting of Detectron2's PanopticFPN module (/detectron & dataset/utils.py)
+* I realize that there are duplicate AdaBins functionalities in the repo that could be unified. This is the result of the modified AdaBins and my own PanopticAdaBins being developed on 2 separate machines. I just did not have the time to refactor it further.

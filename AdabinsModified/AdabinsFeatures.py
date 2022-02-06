@@ -1,6 +1,5 @@
 from models import UnetAdaptiveBins
 import model_io
-import cv2
 
 MIN_DEPTH = 1e-3
 MAX_DEPTH = 10
