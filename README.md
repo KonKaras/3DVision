@@ -51,7 +51,8 @@ data/NYUv2-raw
 * Test set: Set of 654 test images (215 scenes) which also have the segmentation labels.
   * Setup: [Source](https://github.com/cleinc/bts#prepare-nyu-depth-v2-test-set) 
     * If you have already downloaded `nyu_depth_v2_labeled.mat`, create a link in the `data/NYUv2-raw/official_splits` folder.
-    * Call `NYUv2LabeledDepthDatasetSetup("data/NYUv2-raw/official_splits")`.
+    * Create a "test" and "train" folder under `data/NYUv2-raw/official_splits`
+    * Call `python labeled_test_set_setup.py`.
   * Only the `test` subset of the labeled set will be used.
 * Train set: 
   > From the total 120K image-depth pairs, due to asynchronous capturing rates between RGB images and depth maps,
