@@ -1,0 +1,13 @@
+study/rgb_00468.jpg study/sync_depth_00468.png 518.8579
+study/rgb_00469.jpg study/sync_depth_00469.png 518.8579
+study/rgb_00470.jpg study/sync_depth_00470.png 518.8579
+study/rgb_00471.jpg study/sync_depth_00471.png 518.8579
+study/rgb_00472.jpg study/sync_depth_00472.png 518.8579
+study/rgb_00473.jpg study/sync_depth_00473.png 518.8579
+study/rgb_00474.jpg study/sync_depth_00474.png 518.8579
+study/rgb_00475.jpg study/sync_depth_00475.png 518.8579
+study/rgb_00476.jpg study/sync_depth_00476.png 518.8579
+study/rgb_00643.jpg study/sync_depth_00643.png 518.8579
+study/rgb_00644.jpg study/sync_depth_00644.png 518.8579
+study_room/rgb_00272.jpg study_room/sync_depth_00272.png 518.8579
+study_room/rgb_00278.jpg study_room/sync_depth_00278.png 518.8579
